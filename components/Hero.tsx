@@ -150,11 +150,33 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Phone */}
+          {/* Phone — cycling through the real app experience */}
           <div className="relative flex items-center justify-center min-h-[480px]">
             <PhoneFrame
-              screen="/mockups/01-auth.png"
-              screenAlt="MeTo app — pantalla de bienvenida"
+              dwell={3.2}
+              fade={0.55}
+              screens={[
+                {
+                  src: "/mockups/01-auth.png",
+                  alt: "MeTo — pantalla de bienvenida",
+                  label: "Bienvenida",
+                },
+                {
+                  src: "/mockups/03-feed.png",
+                  alt: "MeTo — feed con swipe de productos cercanos",
+                  label: "Deslizá",
+                },
+                {
+                  src: "/mockups/04-match.png",
+                  alt: "MeTo — match recíproco",
+                  label: "Match",
+                },
+                {
+                  src: "/mockups/05-chat.png",
+                  alt: "MeTo — chat con el vendedor",
+                  label: "Chat",
+                },
+              ]}
             />
           </div>
         </div>
