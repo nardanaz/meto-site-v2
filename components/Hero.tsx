@@ -153,8 +153,6 @@ export default function Hero() {
           {/* Phone — cycling through the real app experience */}
           <div className="relative flex items-center justify-center min-h-[480px]">
             <PhoneFrame
-              dwell={3.2}
-              fade={0.55}
               screens={[
                 {
                   src: "/mockups/01-auth.png",
