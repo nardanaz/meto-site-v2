@@ -304,6 +304,19 @@ body {
   100%  { opacity: 0; transform: translateX(-6px); }
 }
 
+/* Mount point for the floating card — placed OVER the phone, not off its right */
+.hero-card-mount {
+  left: 50%;
+  transform: translateX(-50%);
+}
+@media (min-width: 900px) {
+  .hero-card-mount {
+    left: auto;
+    right: -14%;
+    transform: none;
+  }
+}
+
 /* Richer floating cards next to the phone (product / match / chat) */
 .hero-screen-card {
   display: flex;

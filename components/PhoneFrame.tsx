@@ -129,10 +129,9 @@ export default function PhoneFrame({
       {list.length > 1 && list.some((s) => s.product || s.label) && (
         <div
           aria-hidden
-          className="absolute"
+          className="absolute hero-card-mount"
           style={{
-            top: "14%",
-            right: "-26%",
+            top: "16%",
             display: "grid",
             zIndex: 2,
             minWidth: 170,
