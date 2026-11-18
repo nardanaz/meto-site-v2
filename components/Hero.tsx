@@ -78,31 +78,17 @@ export default function Hero() {
               }}
             >
               <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-                <span className="hero-word inline-block will-change-transform">
-                  Lo{" "}
-                </span>
-                <span className="hero-word inline-block will-change-transform">
-                  que{" "}
-                </span>
-                <span className="hero-word inline-block will-change-transform">
-                  tenés
-                </span>
+                <span className="hero-word inline-block will-change-transform">Lo</span>{" "}
+                <span className="hero-word inline-block will-change-transform">que</span>{" "}
+                <span className="hero-word inline-block will-change-transform">tenés</span>
               </span>
               <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-                <span className="hero-word inline-block will-change-transform gradient-text">
-                  cerca,
-                </span>
+                <span className="hero-word inline-block will-change-transform gradient-text">cerca,</span>
               </span>
               <span className="block overflow-hidden pb-[0.08em] -mb-[0.08em]">
-                <span className="hero-word inline-block will-change-transform">
-                  en{" "}
-                </span>
-                <span className="hero-word inline-block will-change-transform">
-                  un{" "}
-                </span>
-                <span className="hero-word inline-block will-change-transform">
-                  swipe.
-                </span>
+                <span className="hero-word inline-block will-change-transform">en</span>{" "}
+                <span className="hero-word inline-block will-change-transform">un</span>{" "}
+                <span className="hero-word inline-block will-change-transform">swipe.</span>
               </span>
             </h1>
 
