@@ -21,6 +21,16 @@ type Screen = {
   product?: Product;
   /** Variant for the chip look (default = product card) */
   chipVariant?: "product" | "match" | "chat";
+  /** Optional photo overlaid on top of the screen (over the [Foto del producto]
+   *  placeholder in the feed mockup). Position uses % of the phone-screen area. */
+  productPhoto?: {
+    src: string;
+    alt: string;
+    top?: string;
+    left?: string;
+    width?: string;
+    height?: string;
+  };
 };
 
 type Props = {
@@ -107,19 +117,42 @@ export default function PhoneFrame({
             style={{ borderRadius: 36 }}
           >
             {list.map((s, i) => (
-              <Image
+              <div
                 key={s.src + i}
-                src={s.src}
-                alt={s.alt}
-                width={width}
-                height={Math.round((width * 620) / 300)}
-                priority={i === 0}
                 className="hero-screen-img"
                 style={{
                   animationDelay: `${i * dwell}s`,
                   animationDuration: `${cycleDur}s`,
                 }}
-              />
+              >
+                <Image
+                  src={s.src}
+                  alt={s.alt}
+                  width={width}
+                  height={Math.round((width * 620) / 300)}
+                  priority={i === 0}
+                  className="w-full h-full object-cover object-top"
+                />
+                {s.productPhoto && (
+                  <div
+                    className="absolute overflow-hidden rounded-[8px]"
+                    style={{
+                      top: s.productPhoto.top ?? "28.5%",
+                      left: s.productPhoto.left ?? "2%",
+                      width: s.productPhoto.width ?? "96%",
+                      height: s.productPhoto.height ?? "46.5%",
+                    }}
+                  >
+                    <Image
+                      src={s.productPhoto.src}
+                      alt={s.productPhoto.alt}
+                      fill
+                      sizes="300px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              </div>
             ))}
           </div>
         </div>

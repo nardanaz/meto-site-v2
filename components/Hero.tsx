@@ -162,6 +162,10 @@ export default function Hero() {
                 {
                   src: "/mockups/03-feed.png",
                   alt: "MeTo — feed con swipe de productos cercanos",
+                  productPhoto: {
+                    src: "/products/campera.jpg",
+                    alt: "Campera de jean vintage",
+                  },
                   product: {
                     icon: "🧥",
                     name: "Campera vintage",
