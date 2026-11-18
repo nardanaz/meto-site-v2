@@ -1,12 +1,15 @@
 type Props = {
   size?: number;
   variant?: "flat" | "gradient";
+  /** Loop the coral dot through the 5 canonical positions (official Motion 01 "Respiración") */
+  animated?: boolean;
   className?: string;
 };
 
 export default function Isotype({
   size = 40,
   variant = "flat",
+  animated = false,
   className,
 }: Props) {
   const id = `iso-grad-${variant}`;
@@ -37,7 +40,30 @@ export default function Isotype({
         <rect x="46" y="0" width="38" height="38" rx="4" fill="#FFFFFF" />
         <rect x="0" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
         <rect x="46" y="46" width="38" height="38" rx="4" fill="#FFFFFF" />
-        <circle cx="42" cy="42" r="8" fill="#FF4D6D" />
+        {animated ? (
+          <circle r="8" fill="#FF4D6D">
+            <animate
+              attributeName="cx"
+              values="42; 19; 65; 65; 19; 42"
+              keyTimes="0; 0.2; 0.4; 0.6; 0.8; 1"
+              dur="6s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+            />
+            <animate
+              attributeName="cy"
+              values="42; 19; 19; 65; 65; 42"
+              keyTimes="0; 0.2; 0.4; 0.6; 0.8; 1"
+              dur="6s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1; 0.4 0 0.2 1"
+            />
+          </circle>
+        ) : (
+          <circle cx="42" cy="42" r="8" fill="#FF4D6D" />
+        )}
       </g>
     </svg>
   );

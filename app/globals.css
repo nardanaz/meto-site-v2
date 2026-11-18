@@ -304,6 +304,141 @@ body {
   100%  { opacity: 0; transform: translateX(-6px); }
 }
 
+/* Richer floating cards next to the phone (product / match / chat) */
+.hero-screen-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  background: color-mix(in oklab, var(--bg-canvas) 78%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateX(14px) translateY(4px);
+  animation-name: chip-cycle;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  will-change: opacity, transform;
+  box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.65);
+  align-items: center;
+  min-width: 170px;
+  max-width: 220px;
+}
+
+.hero-screen-card--product .product-thumb {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border-base);
+}
+.hero-screen-card--product .product-icon {
+  font-size: 26px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.hero-screen-card--product .product-info {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.hero-screen-card--product .product-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hero-screen-card--product .product-meta {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.hero-screen-card--product .product-price { color: var(--violet-400); font-weight: 600; }
+.hero-screen-card--product .product-sep { color: var(--text-dim); }
+.hero-screen-card--product .product-distance {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+}
+.hero-screen-card--product .pin-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--coral-500);
+  box-shadow: 0 0 6px var(--coral-glow);
+}
+
+/* Match card */
+.hero-screen-card--match {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, var(--coral-500), #ff7891);
+  border-color: transparent;
+  box-shadow:
+    0 12px 32px -8px var(--coral-glow),
+    0 16px 40px -14px rgba(0, 0, 0, 0.5);
+  min-width: 170px;
+}
+.hero-screen-card--match .match-label {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.015em;
+  color: #fff;
+}
+.hero-screen-card--match .match-sub {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.01em;
+}
+
+/* Chat card */
+.hero-screen-card--chat {
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  min-width: 170px;
+}
+.hero-screen-card--chat .chat-dots {
+  display: inline-flex;
+  gap: 4px;
+  padding: 6px 8px;
+  background: var(--violet-500);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+}
+.hero-screen-card--chat .chat-dots span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  animation: chat-typing 1.2s ease-in-out infinite;
+}
+.hero-screen-card--chat .chat-dots span:nth-child(2) { animation-delay: 0.15s; }
+.hero-screen-card--chat .chat-dots span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes chat-typing {
+  0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-2px); }
+}
+
 @keyframes phone-float {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-10px); }

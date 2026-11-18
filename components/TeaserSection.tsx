@@ -97,8 +97,11 @@ export default function TeaserSection() {
             className="w-full h-full object-cover"
             src="/videos/teaser.mp4"
             poster="/videos/teaser-poster.jpg"
-            controls
+            autoPlay
+            muted
+            loop
             playsInline
+            controls
             preload="metadata"
             aria-label="Teaser oficial de MeTo"
           />

@@ -2,11 +2,25 @@
 
 import Image from "next/image";
 
+type Product = {
+  /** Short emoji or icon for the product thumbnail */
+  icon: string;
+  name: string;
+  price: string;
+  distance: string;
+  /** Tint of the thumbnail background */
+  tone?: "violet" | "coral" | "amber" | "teal";
+};
+
 type Screen = {
   src: string;
   alt: string;
-  /** Short label shown as a floating badge when this screen is active */
+  /** Short label for the floating chip (fallback when no product) */
   label?: string;
+  /** Rich product card shown next to the phone while this screen is active */
+  product?: Product;
+  /** Variant for the chip look (default = product card) */
+  chipVariant?: "product" | "match" | "chat";
 };
 
 type Props = {
@@ -17,6 +31,13 @@ type Props = {
   screens?: Screen[];
   width?: number;
   rotate?: number;
+};
+
+const toneBg: Record<NonNullable<Product["tone"]>, string> = {
+  violet: "linear-gradient(135deg, rgba(112, 56, 255, 0.35), rgba(74, 31, 217, 0.5))",
+  coral:  "linear-gradient(135deg, rgba(255, 77, 109, 0.35), rgba(255, 122, 145, 0.25))",
+  amber:  "linear-gradient(135deg, rgba(255, 183, 77, 0.3), rgba(201, 162, 39, 0.3))",
+  teal:   "linear-gradient(135deg, rgba(56, 189, 201, 0.3), rgba(26, 127, 153, 0.3))",
 };
 
 export default function PhoneFrame({
@@ -30,9 +51,6 @@ export default function PhoneFrame({
     screens ??
     (screen ? [{ src: screen, alt: screenAlt ?? "" }] : []);
 
-  // Keyframes in globals.css are tuned for a 4-step cycle with ~3.2s dwell
-  // and ~0.55s fade. The animationDuration below sets the loop length;
-  // keyframes use relative %, so the proportions stay right.
   const dwell = 3.2;
   const cycleDur = Math.max(list.length, 1) * dwell;
 
@@ -107,20 +125,82 @@ export default function PhoneFrame({
         </div>
       </div>
 
-      {/* Floating chip (label of the active screen) */}
-      {list.length > 1 && list.some((s) => s.label) && (
+      {/* Floating rich card (product / match / chat) */}
+      {list.length > 1 && list.some((s) => s.product || s.label) && (
         <div
           aria-hidden
           className="absolute"
           style={{
-            top: "12%",
-            right: "-16%",
+            top: "14%",
+            right: "-26%",
             display: "grid",
             zIndex: 2,
+            minWidth: 170,
           }}
         >
           {list.map((s, i) =>
-            s.label ? (
+            s.product ? (
+              <article
+                key={s.src + "-card"}
+                className="hero-screen-card hero-screen-card--product"
+                style={{
+                  gridRow: 1,
+                  gridColumn: 1,
+                  animationDelay: `${i * dwell}s`,
+                  animationDuration: `${cycleDur}s`,
+                }}
+              >
+                <div
+                  className="product-thumb"
+                  style={{
+                    background: toneBg[s.product.tone ?? "violet"],
+                  }}
+                >
+                  <span className="product-icon">{s.product.icon}</span>
+                </div>
+                <div className="product-info">
+                  <p className="product-name">{s.product.name}</p>
+                  <p className="product-meta">
+                    <span className="product-price">{s.product.price}</span>
+                    <span className="product-sep">·</span>
+                    <span className="product-distance">
+                      <span aria-hidden className="pin-dot" />
+                      {s.product.distance}
+                    </span>
+                  </p>
+                </div>
+              </article>
+            ) : s.chipVariant === "match" ? (
+              <div
+                key={s.src + "-match"}
+                className="hero-screen-card hero-screen-card--match"
+                style={{
+                  gridRow: 1,
+                  gridColumn: 1,
+                  animationDelay: `${i * dwell}s`,
+                  animationDuration: `${cycleDur}s`,
+                }}
+              >
+                <span className="match-label">¡Match!</span>
+                <span className="match-sub">{s.label ?? "Están a cuadras tuyas"}</span>
+              </div>
+            ) : s.chipVariant === "chat" ? (
+              <div
+                key={s.src + "-chat"}
+                className="hero-screen-card hero-screen-card--chat"
+                style={{
+                  gridRow: 1,
+                  gridColumn: 1,
+                  animationDelay: `${i * dwell}s`,
+                  animationDuration: `${cycleDur}s`,
+                }}
+              >
+                <span className="chat-dots" aria-hidden>
+                  <span /><span /><span />
+                </span>
+                <span>{s.label ?? "Escribiendo..."}</span>
+              </div>
+            ) : s.label ? (
               <span
                 key={s.src + "-label"}
                 className="hero-screen-chip font-mono-tiny"

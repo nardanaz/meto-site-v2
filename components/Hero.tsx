@@ -162,17 +162,25 @@ export default function Hero() {
                 {
                   src: "/mockups/03-feed.png",
                   alt: "MeTo — feed con swipe de productos cercanos",
-                  label: "Deslizá",
+                  product: {
+                    icon: "🧥",
+                    name: "Campera vintage",
+                    price: "$18.000",
+                    distance: "a 4 cuadras",
+                    tone: "coral",
+                  },
                 },
                 {
                   src: "/mockups/04-match.png",
                   alt: "MeTo — match recíproco",
-                  label: "Match",
+                  chipVariant: "match",
+                  label: "A 4 cuadras tuyas",
                 },
                 {
                   src: "/mockups/05-chat.png",
                   alt: "MeTo — chat con el vendedor",
-                  label: "Chat",
+                  chipVariant: "chat",
+                  label: "Coordinando...",
                 },
               ]}
             />

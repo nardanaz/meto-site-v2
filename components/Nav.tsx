@@ -40,7 +40,7 @@ export default function Nav() {
           className="flex items-center gap-2.5 text-white focus-ring"
           aria-label="MeTo home"
         >
-          <Isotype size={32} />
+          <Isotype size={32} animated />
           <span className="font-display text-[17px] tracking-[-0.02em]">
             MeTo
           </span>
