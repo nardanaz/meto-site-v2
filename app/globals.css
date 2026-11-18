@@ -1,26 +1,255 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────── */
+/*  MeTo · Design tokens derived from the official teaser   */
+/* ──────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surface — dark premium */
+  --bg-void:        #050308;   /* pure black with a hint of purple */
+  --bg-canvas:      #09090F;   /* primary surface */
+  --bg-raised:      #14111F;   /* cards, modals */
+  --bg-elevated:    #1C1830;   /* hovers */
+
+  /* Violet family (from teaser gradient sampling) */
+  --violet-900:     #2C0E8A;   /* deep */
+  --violet-700:     #4A1FD9;   /* saturated */
+  --violet-500:     #7038FF;   /* primary brand */
+  --violet-400:     #9B72FF;   /* luminous */
+  --violet-300:     #B59CFF;   /* soft */
+  --violet-glow:    rgba(112, 56, 255, 0.38);
+
+  /* Coral/pink accents (match stamps, CTAs) */
+  --coral-500:      #FF4D6D;
+  --coral-400:      #FF7A91;
+  --coral-glow:     rgba(255, 77, 109, 0.35);
+
+  /* Text */
+  --text-primary:   #FFFFFF;
+  --text-secondary: #B8B5C8;   /* muted copy */
+  --text-tertiary:  #7D7A90;   /* fine print */
+  --text-dim:       #4A4659;   /* almost disabled */
+
+  /* Hairlines */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-base:    rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  /* Motion */
+  --ease-brand:         cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-expo:      cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-back:      cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth:        cubic-bezier(0.645, 0.045, 0.355, 1);
+  --dur-xs:  120ms;
+  --dur-sm:  220ms;
+  --dur-md:  420ms;
+  --dur-lg:  700ms;
+  --dur-xl:  1100ms;
+  --dur-xxl: 1800ms;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void:        var(--bg-void);
+  --color-canvas:      var(--bg-canvas);
+  --color-raised:      var(--bg-raised);
+  --color-elevated:    var(--bg-elevated);
+  --color-violet-900:  var(--violet-900);
+  --color-violet-700:  var(--violet-700);
+  --color-violet-500:  var(--violet-500);
+  --color-violet-400:  var(--violet-400);
+  --color-violet-300:  var(--violet-300);
+  --color-coral-500:   var(--coral-500);
+  --color-coral-400:   var(--coral-400);
+  --color-ink:         var(--text-primary);
+  --color-fog:         var(--text-secondary);
+  --color-mist:        var(--text-tertiary);
+  --color-dim:         var(--text-dim);
+  --color-border:      var(--border-base);
+  --color-hairline:    var(--border-subtle);
+  --color-strong:      var(--border-strong);
+  --font-sans:         var(--font-geist-sans);
+  --font-mono:         var(--font-geist-mono);
+
+  /* Fluid type scale — matches teaser display aesthetic */
+  --text-display:  clamp(3.5rem, 10vw, 9rem);  /* hero */
+  --text-chapter: clamp(2.75rem, 6vw, 5.5rem);  /* section headlines */
+  --text-h2:      clamp(2rem, 4vw, 3.25rem);
+  --text-h3:      clamp(1.375rem, 2.3vw, 1.75rem);
+  --text-body:    clamp(1rem, 1.2vw, 1.125rem);
+  --text-fine:    0.8125rem;
+  --text-tiny:    0.6875rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { box-sizing: border-box; }
+
+html {
+  background: var(--bg-void);
+  color-scheme: dark;
+  scroll-behavior: auto; /* let Lenis handle smoothing */
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  font-feature-settings: "ss01", "ss03", "cv11";
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--violet-500);
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Utility primitives                                       */
+/* ──────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-geist-sans), sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+.font-mono-tiny {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: var(--text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.gradient-text {
+  background: linear-gradient(
+    110deg,
+    var(--text-primary) 0%,
+    var(--text-primary) 45%,
+    var(--violet-400) 70%,
+    var(--violet-300) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--violet-400);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Hero opening — a point of light expanding (teaser 0s)   */
+/* ──────────────────────────────────────────────────────── */
+.hero-origin {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.hero-origin::before {
+  content: "";
+  width: 900px;
+  height: 900px;
+  max-width: 120vw;
+  max-height: 120vh;
+  background: radial-gradient(
+    circle at center,
+    var(--violet-700) 0%,
+    rgba(74, 31, 217, 0.55) 18%,
+    rgba(74, 31, 217, 0.25) 32%,
+    rgba(112, 56, 255, 0.08) 55%,
+    transparent 75%
+  );
+  filter: blur(14px);
+  transform: scale(0);
+  animation: origin-bloom 2600ms var(--ease-out-expo) 100ms forwards;
+}
+.hero-origin::after {
+  content: "";
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 36px 10px rgba(255, 255, 255, 0.5);
+  transform: scale(0);
+  animation: origin-spark 900ms var(--ease-out-back) 200ms forwards;
+}
+@keyframes origin-bloom {
+  0%   { transform: scale(0); opacity: 0.0; }
+  18%  { transform: scale(0.35); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.85; }
+}
+@keyframes origin-spark {
+  0%   { transform: scale(0); opacity: 0; }
+  60%  { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.35); opacity: 0; }
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Grain layer — adds dirt and prevents banding            */
+/* ──────────────────────────────────────────────────────── */
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='3' stitchTiles='stitch'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.75'/></svg>");
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Scroll cue                                              */
+/* ──────────────────────────────────────────────────────── */
+.scroll-cue {
+  position: absolute;
+  bottom: clamp(24px, 4vh, 48px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+  color: var(--text-tertiary);
+}
+.scroll-cue-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-tertiary), transparent);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-cue-line::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--violet-400), transparent 70%);
+  animation: scroll-cue-slide 2.2s var(--ease-smooth) infinite;
+}
+@keyframes scroll-cue-slide {
+  0%   { transform: translateY(-100%); }
+  55%  { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Reduced motion                                          */
+/* ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .scroll-cue-line::after { animation: none !important; }
 }
