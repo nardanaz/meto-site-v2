@@ -2,6 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import PhoneFrame from "./PhoneFrame";
+import FeedScreen from "./phone-screens/FeedScreen";
+import MatchScreen from "./phone-screens/MatchScreen";
+
+const campera = {
+  photo: "/products/campera.jpg",
+  photoAlt: "Campera de jean vintage color terracota",
+};
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -160,12 +167,22 @@ export default function Hero() {
                   label: "Bienvenida",
                 },
                 {
-                  src: "/mockups/03-feed.png",
-                  alt: "MeTo — feed con swipe de productos cercanos",
-                  productPhoto: {
-                    src: "/products/campera.jpg",
-                    alt: "Campera de jean vintage",
-                  },
+                  render: () => (
+                    <FeedScreen
+                      product={{
+                        ...campera,
+                        price: "$ 18.000",
+                        name: "Campera de jean vintage Levi's",
+                        distance: "4 cuadras",
+                        agoLabel: "hace 2 h",
+                        seller: {
+                          initial: "C",
+                          name: "Carolina M.",
+                          rating: "★ 4.7 (87)",
+                        },
+                      }}
+                    />
+                  ),
                   product: {
                     icon: "🧥",
                     name: "Campera vintage",
@@ -175,8 +192,15 @@ export default function Hero() {
                   },
                 },
                 {
-                  src: "/mockups/04-match.png",
-                  alt: "MeTo — match recíproco",
+                  render: () => (
+                    <MatchScreen
+                      product={{
+                        ...campera,
+                        name: "Campera vintage Levi's",
+                        distance: "4 cuadras",
+                      }}
+                    />
+                  ),
                   chipVariant: "match",
                   label: "A 4 cuadras tuyas",
                 },
