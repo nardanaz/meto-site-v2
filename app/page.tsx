@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
+import TeaserSection from "@/components/TeaserSection";
 
 export default function Home() {
   return (
@@ -7,7 +8,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        {/* TODO: QueEsMeto · Benefits · HowItWorks · Hyperlocal · Download · Footer */}
+        <TeaserSection />
+        {/* TODO: Benefits · HowItWorks · Hyperlocal · Download · Footer */}
       </main>
     </>
   );
