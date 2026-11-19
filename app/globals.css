@@ -904,6 +904,21 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────── */
+/*  How It Works layout                                     */
+/* ──────────────────────────────────────────────────────── */
+.hiw-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+@media (min-width: 900px) {
+  .hiw-layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 64px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────── */
 /*  Reduced motion                                          */
 /* ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
