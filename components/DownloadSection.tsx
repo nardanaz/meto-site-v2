@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import Isotype from "./Isotype";
+import WaitlistForm from "./WaitlistForm";
 
 const orbiting = [
   { icon: "🧥", name: "Campera vintage", price: "$18.000", pos: { x: -200, y: -40 }, delay: 0.1 },
@@ -136,15 +137,13 @@ export default function DownloadSection() {
         </div>
 
         <p className="mt-5 font-mono-tiny text-[color:var(--text-tertiary)]">
-          Próximamente · Dejá tu mail en{" "}
-          <a
-            href="mailto:hola@meto.com.ar"
-            className="underline underline-offset-2 hover:text-[color:var(--violet-300)]"
-          >
-            hola@meto.com.ar
-          </a>{" "}
-          para la lista de espera
+          Próximamente · Dejá tu mail abajo y te avisamos cuando podamos
+          arrancar en tu zona.
         </p>
+
+        <div id="waitlist" className="mt-2">
+          <WaitlistForm />
+        </div>
       </div>
     </section>
   );
