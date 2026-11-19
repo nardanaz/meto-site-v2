@@ -810,6 +810,100 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────── */
+/*  Benefits bento card                                     */
+/* ──────────────────────────────────────────────────────── */
+.benefit-card {
+  position: relative;
+  padding: 28px 28px 32px;
+  border-radius: 24px;
+  background: color-mix(in oklab, #fff 3%, var(--bg-raised));
+  border: 1px solid var(--border-base);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 260px;
+  overflow: hidden;
+  transition:
+    border-color 400ms var(--ease-brand),
+    transform 400ms var(--ease-brand),
+    background 400ms var(--ease-brand);
+}
+.benefit-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  background: radial-gradient(
+    60% 100% at 20% 0%,
+    rgba(112, 56, 255, 0.18),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 500ms var(--ease-brand);
+  pointer-events: none;
+}
+.benefit-card:hover {
+  border-color: color-mix(in oklab, var(--violet-400) 50%, var(--border-base));
+  transform: translateY(-3px);
+  background: color-mix(in oklab, #fff 5%, var(--bg-raised));
+}
+.benefit-card:hover::before { opacity: 1; }
+
+.benefit-icon {
+  position: relative;
+  z-index: 1;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--violet-500) 15%, transparent);
+  border: 1px solid color-mix(in oklab, var(--violet-400) 25%, transparent);
+  display: grid;
+  place-items: center;
+  color: var(--violet-300);
+  transition:
+    background 400ms var(--ease-brand),
+    border-color 400ms var(--ease-brand);
+}
+.benefit-card:hover .benefit-icon {
+  background: color-mix(in oklab, var(--violet-500) 25%, transparent);
+  border-color: color-mix(in oklab, var(--violet-400) 60%, transparent);
+}
+
+.benefit-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+.benefit-eyebrow {
+  color: var(--text-tertiary);
+  margin: 0;
+}
+.benefit-headline {
+  font-size: clamp(1.25rem, 1.6vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin: 0;
+  max-width: 28ch;
+  text-wrap: balance;
+}
+.benefit-body {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 54ch;
+}
+
+@media (max-width: 900px) {
+  .benefit-card { min-height: 220px; grid-column: span 3 / span 3 !important; }
+}
+
+/* ──────────────────────────────────────────────────────── */
 /*  Reduced motion                                          */
 /* ──────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
