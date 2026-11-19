@@ -6,10 +6,12 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import HyperlocalSection from "@/components/HyperlocalSection";
 import DownloadSection from "@/components/DownloadSection";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
     <>
+      <SmoothScroll />
       <Nav />
       <main>
         <Hero />
