@@ -904,6 +904,92 @@ body {
 }
 
 /* ──────────────────────────────────────────────────────── */
+/*  Download orbit cards                                    */
+/* ──────────────────────────────────────────────────────── */
+.orbit-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px 10px 10px;
+  border-radius: 14px;
+  background: color-mix(in oklab, var(--bg-canvas) 85%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+.orbit-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(112, 56, 255, 0.35), rgba(74, 31, 217, 0.5));
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+.orbit-info {
+  display: grid;
+  gap: 2px;
+}
+.orbit-name {
+  margin: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.orbit-price {
+  margin: 0;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--violet-400);
+  font-weight: 600;
+}
+
+/* ──────────────────────────────────────────────────────── */
+/*  Hyperlocal map pills                                    */
+/* ──────────────────────────────────────────────────────── */
+.hl-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg-void) 70%, transparent);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-strong);
+  font-size: 10px;
+  color: var(--text-primary);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.hl-pill .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--coral-500);
+}
+.hl-pill--user {
+  background: color-mix(in oklab, var(--coral-500) 85%, transparent);
+  border-color: var(--coral-400);
+  color: #fff;
+  font-weight: 700;
+}
+.hl-pill--user .dot {
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+.hl-pill--radius {
+  background: color-mix(in oklab, var(--violet-500) 20%, var(--bg-void));
+  border-color: color-mix(in oklab, var(--violet-400) 50%, transparent);
+  color: var(--violet-300);
+  font-weight: 700;
+}
+
+/* ──────────────────────────────────────────────────────── */
 /*  How It Works layout                                     */
 /* ──────────────────────────────────────────────────────── */
 .hiw-layout {
